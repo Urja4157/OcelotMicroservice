@@ -1,0 +1,58 @@
+﻿{
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost"
+  },
+  "Routes": [
+    {
+
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 14650
+        }
+      ],
+      "UpstreamPathTemplate": "/apigateway/user/{everything}",
+      "UpstreamHttpMethod": [ "GET","POST","PUT","DELETE" ],
+      "SwaggerKey": "user"
+
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 2209
+        }
+      ],
+      "UpstreamPathTemplate": "/apigateway/attendanceLeave/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "SwaggerKey": "attendanceLeave"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "user",
+      "Config": [
+        {
+          "Name": "User API",
+          "Version": "v1",
+          "Url": "http://localhost:14650/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "attendanceLeave",
+      "Config": [
+        {
+          "Name": "Attendance and leave API",
+          "Version": "v1",
+          "Url": "http://localhost:2209/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}

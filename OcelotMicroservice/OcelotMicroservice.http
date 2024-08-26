@@ -1,0 +1,6 @@
+@OcelotMicroservice_HostAddress = http://localhost:1595
+
+GET {{OcelotMicroservice_HostAddress}}/apigateway/user/Address/GetAddressList
+Accept: application/json
+
+###
