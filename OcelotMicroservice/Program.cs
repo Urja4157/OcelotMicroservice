@@ -13,6 +13,18 @@ builder.Services.AddSwaggerGen();
 // Configure Ocelot to use the ocelot.json file
 builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+             builder =>
+             {
+                 builder.WithOrigins(
+                    "*"
+                 )
+                 .AllowAnyHeader()
+                 .AllowAnyMethod();
+             });
+});
 // Add Ocelot services to the container
 builder.Services.AddOcelot(builder.Configuration);
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
@@ -35,6 +47,9 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+// Enable CORS in Ocelot
+app.UseCors("AllowSpecificOrigin");
+app.UseRouting();
 app.UseSwaggerForOcelotUI(opt =>
 {
     opt.PathToSwaggerGenerator = "/swagger/docs";
